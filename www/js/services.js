@@ -3,7 +3,7 @@ angular.module('starter.services', [])
 /**
  * A simple example service that returns some data.
  */
-.factory('PetService', function() {
+.factory('WeatherService', ['$http', function($http) {
   // Might use a resource here that returns a JSON array
 
   // Some fake testing data
@@ -13,14 +13,20 @@ angular.module('starter.services', [])
     { id: 2, title: 'Turtles', description: 'Everyone likes turtles.' },
     { id: 3, title: 'Sharks', description: 'An advanced pet. Needs millions of gallons of salt water. Will happily eat you.' }
   ];
+  var current = {};
+
+
 
   return {
     all: function() {
       return pets;
+    },
+    current: function() {
+      return current;
     },
     get: function(petId) {
       // Simple index lookup
       return pets[petId];
     }
   }
-});
+}]);

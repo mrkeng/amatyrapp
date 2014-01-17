@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.services', 'starter.controllers'])
+angular.module('starter', ['ionic', 'starter.services', 'starter.controllers', 'starter.filters', 'starter.directives'])
 
 
 .config(function($stateProvider, $urlRouterProvider) {
@@ -23,13 +23,16 @@ angular.module('starter', ['ionic', 'starter.services', 'starter.controllers'])
       templateUrl: "templates/tabs.html"
     })
 
-    // the pet tab has its own child nav-view and history
-    .state('tab.pet-index', {
-      url: '/pets',
+    // the weather tab has its own child nav-view and history
+    .state('tab.weather-index', {
+      url: '/weather',
       views: {
-        'pets-tab': {
-          templateUrl: 'templates/pet-index.html',
-          controller: 'PetIndexCtrl'
+        'weather-tab': {
+          templateUrl: 'templates/weather-index.html',
+          controller: 'WeatherIndexCtrl',
+          resolve: {
+            current: WeatherIndexCtrl.current
+          }
         }
       }
     })
@@ -37,18 +40,18 @@ angular.module('starter', ['ionic', 'starter.services', 'starter.controllers'])
     .state('tab.pet-detail', {
       url: '/pet/:petId',
       views: {
-        'pets-tab': {
+        'weather-tab': {
           templateUrl: 'templates/pet-detail.html',
           controller: 'PetDetailCtrl'
         }
       }
     })
 
-    .state('tab.adopt', {
-      url: '/adopt',
+    .state('tab.camera', {
+      url: '/camera',
       views: {
-        'adopt-tab': {
-          templateUrl: 'templates/adopt.html'
+        'camera-tab': {
+          templateUrl: 'templates/camera.html'
         }
       }
     })
@@ -63,7 +66,7 @@ angular.module('starter', ['ionic', 'starter.services', 'starter.controllers'])
     });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/pets');
+  $urlRouterProvider.otherwise('/tab/weather');
 
 });
 

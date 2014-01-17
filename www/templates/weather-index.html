@@ -1,0 +1,67 @@
+<!--
+  This template gets placed in the Weather tab's <nav-view> directive.
+  It was wired up in the app config (app.js)
+  The 'current' data comes from its $scope within WeatherIndexCtrl (controller.js)
+-->
+<view title="current.datetime">
+  <content has-header="true" has-tabs="true">
+  <div class="card">
+      <div class="item item-icon-left">
+        <i class="icon ion-thermometer"></i>
+        <div style="float:right;">
+          <h3>Feels like</h3>
+          <p ng-class="{'blue':current.windchill<0,'red':current.windchill>0}">{{ current.windchill | temperature }}</p>
+        </div>
+        <h3>Temp</h3>
+        <p ng-class="{'blue':current.outtemp<0,'red':current.outtemp>0}">{{ current.outtemp | temperature }}</p>
+        <div linechart data="tempdata" label="d3Label"></div>
+        <h5>
+          <span id="temp-hi">↑ <span>{{ highTemp.outtemp | temperature }}</span>&deg;</span>
+          <span id="temp-lo">↓ <span>{{ lowTemp.outtemp | temperature }}</span>&deg;</span>
+        </h5>
+      </div>
+    </div>
+    <div class="card">
+      <div class="item item-icon-left">
+        <i class="icon ion-umbrella"></i>
+            <h3>Day rain</h3>
+        <p>{{ current.dayrain | rain }}</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="item item-icon-left">
+        <i class="icon ion-leaf"></i>
+        <div style="float:right;">
+          <h3>Gust</h3>
+          <p> {{ current.windgust | windspeed }} </p>
+        </div>
+        <h3>Wind</h3>
+        <p> {{ current.windspeed | windspeed }} </p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="item item-icon-left">
+        <i class="icon ion-waterdrop"></i>
+        <h3>Humidity</h3>
+        <p> {{ current.outhumidity | humidity }}</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="item item-icon-left">
+        <i class="icon ion-connection-bars"></i>
+        <h3>Barometer</h3>
+        <p> {{ current.barometer | pressure }}</p>
+      </div>
+    </div>
+    <!--
+    <list>
+      <div ng-repeat="(obj, val) in current" type="item-text-wrap" href="#/tab/weather/{{weather.id}}">
+      <item ng-show="val">
+        <h3>{{obj}}</h3>
+        <p>{{val}}</p>
+      </item>
+      </div>
+    </list>
+    -->
+  </content>
+</view>
