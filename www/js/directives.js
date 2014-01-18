@@ -47,6 +47,22 @@ angular.module('starter.directives', [])
             var y = d3.scale.linear().domain(d3.extent(data)).range([height, 0]);
 
 
+        // Temperature line coloring
+        // Thanks to http://bl.ocks.org/mbostock/3970883
+        d3.select("#temperature-gradient")
+            .attr("gradientUnits", "userSpaceOnUse")
+            .attr("x1", 0).attr("y1", y(-1))
+            .attr("x2", 0).attr("y2", y(1))
+          .selectAll("stop")
+            .data([
+                    {offset: "0%", color: "steelblue"},
+                    {offset: "50%", color: "steelblue"},
+                    {offset: "50%", color: "#b5152b"},
+                    {offset: "100%", color: "#b5152b"}
+                    ])
+          .enter().append("stop")
+            .attr("offset", function(d) { return d.offset; })
+            .attr("stop-color", function(d) { return d.color; });
 
             var line = d3.svg.line()
                 .x(function(d,i) { return x(i); })
@@ -73,6 +89,7 @@ angular.module('starter.directives', [])
             svg.append("path")
                 .attr("d", line(data))
                     .data([data])
+                    .style("stroke", "url('#temperature-gradient')")
                     .attr("transform", "translate(" + 30 + ")"); // animate a slide to the left back to x(0) pixels to reveal the new value
           }
       }

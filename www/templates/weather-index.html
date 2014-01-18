@@ -16,8 +16,8 @@
         <p ng-class="{'blue':current.outtemp<0,'red':current.outtemp>0}">{{ current.outtemp | temperature }}</p>
         <div linechart data="tempdata" label="d3Label"></div>
         <h5>
-          <span id="temp-hi">↑ <span>{{ highTemp.outtemp | temperature }}</span>&deg;</span>
-          <span id="temp-lo">↓ <span>{{ lowTemp.outtemp | temperature }}</span>&deg;</span>
+          <span>↑ <span>{{ highTemp.outtemp | temperature }}</span></span>
+          <span>↓ <span>{{ lowTemp.outtemp | temperature }}</span></span>
         </h5>
       </div>
     </div>
@@ -34,9 +34,15 @@
         <div style="float:right;">
           <h3>Gust</h3>
           <p> {{ current.windgust | windspeed }} </p>
+          <h5>
+            <span>↑ <span>{{ highGust.windgust | windspeed }}</span></span>
+          </h5>
         </div>
         <h3>Wind</h3>
         <p> {{ current.windspeed | windspeed }} </p>
+        <h5>
+          <span>↑  <span>{{ highWindspeed.windspeed | windspeed }}</span></span>
+        </h5>
       </div>
     </div>
     <div class="card">
@@ -44,6 +50,10 @@
         <i class="icon ion-waterdrop"></i>
         <h3>Humidity</h3>
         <p> {{ current.outhumidity | humidity }}</p>
+        <h5>
+          <span>↑ <span>{{ highHumidity.outhumidity | humidity }}</span></span>
+          <span>↓ <span>{{ lowHumidity.outhumidity | humidity }}</span></span>
+        </h5>
       </div>
     </div>
     <div class="card">
@@ -51,6 +61,10 @@
         <i class="icon ion-connection-bars"></i>
         <h3>Barometer</h3>
         <p> {{ current.barometer | pressure }}</p>
+        <h5>
+          <span>↑ <span>{{ highBarometer.barometer | pressure }}</span></span>
+          <span>↓ <span>{{ lowBarometer.barometer | pressure }}</span></span>
+        </h5>
       </div>
     </div>
     <!--

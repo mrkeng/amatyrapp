@@ -39,7 +39,7 @@ path {
 }
 
 .x.axis line {
-  stroke: lightgrey;
+  stroke: #666;
 }
 
 .x.axis .minor {
@@ -51,8 +51,7 @@ path {
 }
 
 .y.axis line, .y.axis path {
-  fill: none;
-  stroke: #ededed;
+  stroke: #666;
 }
 .axis text {
   fill: #ededed;

@@ -7,27 +7,36 @@ WeatherIndexCtrl = mod.controller('WeatherIndexCtrl', function($scope, $http, We
   //$scope.current = WeatherService.current();
   $scope.current = current;
 
-  $http({
-      method: 'JSONP',
-      url: 'http://yr.hveem.no/api/day/today?start=today&callback=JSON_CALLBACK'
-  }).then(function(data, status) {
+  $http.jsonp('http://yr.hveem.no/api/hour?start=3day&callback=JSON_CALLBACK').then(function(data, status) {
     var tempdata = [];
     angular.forEach(data.data, function(entry) {
         tempdata.push(entry.outtemp);
     })
     $scope.tempdata = tempdata;
   })
-  $http({
-      method: 'JSONP',
-      url: "http://yr.hveem.no/api/record/outtemp/max?start=today&callback=JSON_CALLBACK"
-  }).then(function(data, status) {
+  $http.jsonp("http://yr.hveem.no/api/record/outtemp/max?start=today&callback=JSON_CALLBACK").then(function(data, status) {
       $scope.highTemp = data.data[0];
   })
-  $http({
-      method: 'JSONP',
-      url: "http://yr.hveem.no/api/record/outtemp/min?start=today&callback=JSON_CALLBACK"
-  }).then(function(data, status) {
+  $http.jsonp("http://yr.hveem.no/api/record/outtemp/min?start=today&callback=JSON_CALLBACK").then(function(data, status) {
       $scope.lowTemp = data.data[0];
+  })
+  $http.jsonp("http://yr.hveem.no/api/record/windspeed/max?start=today&callback=JSON_CALLBACK").then(function(data, status) {
+      $scope.highWindspeed = data.data[0];
+  })
+  $http.jsonp("http://yr.hveem.no/api/record/windgust/max?start=Today&callback=JSON_CALLBACK").then(function(data, status) {
+      $scope.highGust = data.data[0];
+  })
+  $http.jsonp("http://yr.hveem.no/api/record/outhumidity/max?start=today&callback=JSON_CALLBACK").then(function(data, status) {
+      $scope.highHumidity = data.data[0];
+  })
+  $http.jsonp("http://yr.hveem.no/api/record/outhumidity/min?start=today&callback=JSON_CALLBACK").then(function(data, status) {
+      $scope.lowHumidity = data.data[0];
+  })
+  $http.jsonp("http://yr.hveem.no/api/record/barometer/max?start=today&callback=JSON_CALLBACK").then(function(data, status) {
+      $scope.highBarometer = data.data[0];
+  })
+  $http.jsonp("http://yr.hveem.no/api/record/barometer/min?start=today&callback=JSON_CALLBACK").then(function(data, status) {
+      $scope.lowBarometer = data.data[0];
   })
 })
 
